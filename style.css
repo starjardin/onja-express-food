@@ -46,7 +46,7 @@ html {
 	padding: 1rem;
 	border-radius: 3px;
 	position: absolute;
-	top: 2rem;
+	top: 5rem;
 }
 
 .inner-modale h2 {
@@ -70,37 +70,6 @@ html {
 	opacity: 1;
 	pointer-events: all;
 }
-
-.inner-food {
-	background-color: rgba(255, 255, 255, 1);
-	padding: 1rem;
-	border-radius: 3px;
-	position: absolute;
-	top: 2rem;
-}
-
-.inner-food h2 {
-	text-transform: capitalize;
-}
-
-.outer-food {
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	opacity: 0;
-	pointer-events: none;
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-.outer-food.open {
-	opacity: 1;
-	pointer-events: all;
-}
-
 
 .order {
 	display: grid;
