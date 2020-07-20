@@ -82,17 +82,18 @@ const escape = event => {
   }
 }
 
-window.addEventListener('keydown', escape)
+//Add an event to listen to the escape key
+window.addEventListener('keydown', escape);
 
-outerModale.addEventListener('click', hideModale)
-
-//add the the form to the inner html when it gets shown in the modal
+//Add an event outside the modale to escape
+outerModale.addEventListener('click', hideModale);
 
 //add the click button to submit the order
 
-window.addEventListener('click', (e) => {
+window.addEventListener('submit', (e) => {
   e.preventDefault();
-  const form = e.target.matches(".submitOrder");
+  const form = e.target.matches("form");
+  console.log(form)
   const userName = document.querySelector(`[name='name']`);
   //if you click submit order is true, Do this following steps
   if (form) {
@@ -105,7 +106,7 @@ window.addEventListener('click', (e) => {
     <button class="served">Delete order</button>
   </div>
     `
-  orderList.insertAdjacentHTML('afterbegin', myHtml)
+  orderList.insertAdjacentHTML('afterbegin', myHtml);
   outerModale.classList.remove('open');
   html.style.background="white";
   
@@ -129,23 +130,25 @@ window.addEventListener('click', (e) => {
   const details = e.target.matches('.details');
   if (details) {
     const user = document.querySelector(`[name='name']`);
-    const foodSize = document.querySelector(`[name='size']`);
+    const foodSize = document.querySelectorAll(`input[name='size']`);
     const amountOfDish = document.querySelector(`[name='amount']`);
-    const options = document.querySelector('option');
-    console.log(amountOfDish)
-    
-  
-  // //creating html for the food details
+    const options = document.querySelectorAll('option');
+      let chosenOPtion; 
+      foodSize.forEach(foodSize => {
+        foodSize.checked;
+        chosenOPtion = foodSize.value;
+      })
+      console.log(chosenOPtion)
+    // //creating html for the food details
     const foodDetailsHtml = `
     <h2>${user.value}</h2>
       <h3>Order:</h2>
-      <p> ${amountOfDish.value} ${foodSize.value} ${options.value}</p>
+      <p> ${amountOfDish.value} ${chosenOPtion} ${options.value}</p>
       <img src="https://picsum.photos/">
     `
     outerModale.classList.add('open')
     innerModale.innerHTML = foodDetailsHtml;
     html.style.background="gray"
-    innerModale.width="800px"
   }
 })
 
