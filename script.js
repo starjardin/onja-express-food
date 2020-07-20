@@ -1,4 +1,3 @@
-console.log('good luck!');
 //Add and show the modal: grab the button and the inner and the aouter element
 const addOrderButton = document.querySelector('.add-order');
 const innerModale = document.querySelector('.inner-modale');
@@ -9,7 +8,8 @@ const html = document.querySelector('html');
 const foodSize = document.querySelector(`[name='size']`);
 const amount = document.querySelector(`[name='amount']`);
 const options = document.querySelector(`option`);
-
+const outerFoodModale = document.querySelector(".outer-food");
+const innerFoodModale = document.querySelector(".inner-food");
 
 //create a function to show the modal
 const showOrder = (e) => {
@@ -88,14 +88,13 @@ outerModale.addEventListener('click', hideModale)
 
 //add the the form to the inner html when it gets shown in the modal
 
-const outerFoodModale = document.querySelector(".outer-food");
-const innerFoodModale = document.querySelector(".inner-food");
-
 //add the click button to submit the order
 
 window.addEventListener('click', (e) => {
+  e.preventDefault();
   const form = e.target.matches(".submitOrder");
   const userName = document.querySelector(`[name='name']`);
+  //if you click submit order is true, Do this following steps
   if (form) {
     const myHtml = `
     <div class="order" data-dish="romazava" data-size="large" data-amount="2">
@@ -107,33 +106,43 @@ window.addEventListener('click', (e) => {
   </div>
     `
   orderList.insertAdjacentHTML('afterbegin', myHtml)
-  outerModale.style.display = "none;"
+  outerModale.classList.remove('open');
+  html.style.background="white";
+  
   }
-  console.log(form)
-  const formSubmit = document.querySelector('.submitOrder');
-  formSubmit.addEventListener('click', (e) => {
-    e.preventDefault();
-})
-
-
 });
-//show the chosen list to the screen
-//delete button to delete the entry
 
-window.addEventListener('click', e => {
-  const details = e.target.matches(".details");
-  console.log(details)
+
+//Delete button 
+
+window.addEventListener('click', (e) => {
+  const deleteButton = e.target.matches('.served');
+  if (deleteButton) {
+    const buttonServed = document.querySelector('.served');
+    const served = buttonServed.closest('.order');
+    served.remove()
+  }
+});
+
+//Details button
+window.addEventListener('click', (e) => {
+  const details = e.target.matches('.details');
+  if (details) {
+    const user = document.querySelector(`[name='name']`);
+    const foodSize = document.querySelector(`[name='size']`);
+    const amountOfDish = document.querySelector(`[name='amount']`);
+    const options = document.querySelector('option');
+    console.log(amountOfDish)
+    
+  
+  // //creating html for the food details
+    const foodDetailsHtml = `
+    <h2>${user.value}</h2>
+      <h3>Order:</h2>
+      <p> ${amountOfDish.value} ${foodSize.value} ${options.value}</p>
+    `
+    outerModale.classList.add('open')
+    innerModale.innerHTML = foodDetailsHtml;
+  }
 })
-// const formSubmit = document.querySelector('.submitOrder');
 
-// formSubmit.addEventListener('click', (e) => {
-//   e.preventDefault();
-//   innerModale.innerHTML = `
-//     <h1>${userName.value}</h1>
-//     <h2>order:</h2>
-//     <p>${amount.value} ${foodSize.value} ${options.value}</p>
-//     <img scr="https://picsum.photos/" alt="delecious food">
-//   `
-//   innerModale.classList.add('my-food', 'options')
-//   html.style.backgroundColor = "rgb(0, 0, 0, .6)";
-// })
