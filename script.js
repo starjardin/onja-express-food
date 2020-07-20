@@ -88,9 +88,7 @@ window.addEventListener('keydown', escape);
 //Add an event outside the modale to escape
 outerModale.addEventListener('click', hideModale);
 
-//add the click button to submit the order
-
-
+//function to submit the form
 const handleSubmit = (e) => {
   e.preventDefault();
   const formIsSubmit = e.target.matches("form");
@@ -128,6 +126,11 @@ window.addEventListener('click', (e) => {
 
 //Details button
 const functionDetailsButton = (e) => {
+
+};
+
+//Add event listener to the details button here
+window.addEventListener('click', (e) => {
   const details = e.target.matches('.details');
   if (details) {
     const user = document.querySelector(`[name='name']`);
@@ -136,15 +139,16 @@ const functionDetailsButton = (e) => {
     const options = document.querySelectorAll('option');
     //loop throuhg the radio buttons to get the checked list
       let chosenOPtion;
-      foodSize.forEach(foodSize => {
-        foodSize.checked;
-        chosenOPtion = foodSize.value;
+      foodSize.forEach(food => {
+        food.checked;
+        chosenOPtion = food.value;
+
       });
       //Loop thruogh the select list to get the selected list.
       let dish;
-      options.forEach(options => {
-        options.selected;
-        dish = options.value;
+      options.forEach(option => {
+        option.selected;
+        dish = option.value;
       });
 
        //creating html for the food details
@@ -152,13 +156,10 @@ const functionDetailsButton = (e) => {
     <h2>${user.value}</h2>
       <h3>Order:</h2>
       <p> ${amountOfDish.value} ${chosenOPtion} ${dish}</p>
-      <img src="https://picsum.photos/">
+      <img src="./images/images-food.jpg" width="400px" height="300px">
     `
     outerModale.classList.add('open')
     innerModale.innerHTML = foodDetailsHtml;
     html.style.background="gray"
   }
-};
-
-//Add event listener to the details button here
-window.addEventListener('click', functionDetailsButton);
+});
