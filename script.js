@@ -140,9 +140,12 @@ window.addEventListener('click', (e) => {
     <h2>${user.value}</h2>
       <h3>Order:</h2>
       <p> ${amountOfDish.value} ${foodSize.value} ${options.value}</p>
+      <img src="https://picsum.photos/">
     `
     outerModale.classList.add('open')
     innerModale.innerHTML = foodDetailsHtml;
+    html.style.background="gray"
+    innerModale.width="800px"
   }
 })
 
