@@ -90,13 +90,14 @@ outerModale.addEventListener('click', hideModale);
 
 //add the click button to submit the order
 
-window.addEventListener('submit', (e) => {
+
+const handleSubmit = (e) => {
   e.preventDefault();
-  const form = e.target.matches("form");
-  console.log(form)
-  const userName = document.querySelector(`[name='name']`);
+  const formIsSubmit = e.target.matches("form");
+  const form = e.target;
+  const userName = form.name;
   //if you click submit order is true, Do this following steps
-  if (form) {
+  if (formIsSubmit) {
     const myHtml = `
     <div class="order" data-dish="romazava" data-size="large" data-amount="2">
     <span class="title">
@@ -109,13 +110,13 @@ window.addEventListener('submit', (e) => {
   orderList.insertAdjacentHTML('afterbegin', myHtml);
   outerModale.classList.remove('open');
   html.style.background="white";
-  
   }
-});
+};
+
+window.addEventListener('submit', handleSubmit);
 
 
 //Delete button 
-
 window.addEventListener('click', (e) => {
   const deleteButton = e.target.matches('.served');
   if (deleteButton) {
@@ -126,29 +127,38 @@ window.addEventListener('click', (e) => {
 });
 
 //Details button
-window.addEventListener('click', (e) => {
+const functionDetailsButton = (e) => {
   const details = e.target.matches('.details');
   if (details) {
     const user = document.querySelector(`[name='name']`);
-    const foodSize = document.querySelectorAll(`input[name='size']`);
+    const foodSize = document.querySelectorAll(`[name='size']`);
     const amountOfDish = document.querySelector(`[name='amount']`);
     const options = document.querySelectorAll('option');
-      let chosenOPtion; 
+    //loop throuhg the radio buttons to get the checked list
+      let chosenOPtion;
       foodSize.forEach(foodSize => {
         foodSize.checked;
         chosenOPtion = foodSize.value;
-      })
-      console.log(chosenOPtion)
-    // //creating html for the food details
+      });
+      //Loop thruogh the select list to get the selected list.
+      let dish;
+      options.forEach(options => {
+        options.selected;
+        dish = options.value;
+      });
+
+       //creating html for the food details
     const foodDetailsHtml = `
     <h2>${user.value}</h2>
       <h3>Order:</h2>
-      <p> ${amountOfDish.value} ${chosenOPtion} ${options.value}</p>
+      <p> ${amountOfDish.value} ${chosenOPtion} ${dish}</p>
       <img src="https://picsum.photos/">
     `
     outerModale.classList.add('open')
     innerModale.innerHTML = foodDetailsHtml;
     html.style.background="gray"
   }
-})
+};
 
+//Add event listener to the details button here
+window.addEventListener('click', functionDetailsButton);
